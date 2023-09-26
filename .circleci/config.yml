@@ -5,6 +5,11 @@ version: 2.1
 #########
 orbs:
   heroku: circleci/heroku@1.0.1
+  
+parameters:
+  param:
+    type: string
+    default: "Hello World"
 
 ############
 # Workflows
@@ -25,6 +30,14 @@ workflows:
 # Job Definitions
 ##################
 jobs:
+  command-injection-test:
+      docker:
+        - image: cimg/base:2020.01
+      steps:
+        - checkout
+        - run:
+            name: Some name
+            command: echo "<< pipeline.parameters.param >>"
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
