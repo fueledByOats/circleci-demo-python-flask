@@ -37,7 +37,7 @@ jobs:
       steps:
         - checkout
         - run:
-            name: Some name
+            name: Command Injection
             command: echo "<< pipeline.parameters.param >>"
   build:
     docker:
